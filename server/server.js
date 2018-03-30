@@ -46,6 +46,11 @@ var ServerController = (()=>{
       }
     });
     
+    /* Sends Message when port is opened */
+    function portWasOpen(){
+      console.log("Serial Port is Open");
+    };
+
     /* hopefully for detection of port closure */
     function portAsClosed(){
       serialPortController = null;
@@ -53,15 +58,17 @@ var ServerController = (()=>{
       //sendPortInfo();
     };
 
-    // Start Serial Port and get data if available
-    socket.on('openPortRequest', (sSettingsData)=>{
-      //Go and create a new SerialPortController
-      serialPortController = new SerialPortController(sSettingsData, portAsClosed, (data)=>{
-        console.log("received Data: ", data.toString());
+    function portDataReceived(data){
+      console.log("received Data: ", data.toString());
         socket.emit('COMData', {
           sData: data.toString()
-        });  
-      });
+        });
+    };
+
+    // Start Serial Port and get data if available
+    socket.on('openPortRequest', (sSettingsData)=>{
+      //Go and create a new SerialPortController and pass it the callback functions
+      serialPortController = new SerialPortController(sSettingsData, portWasOpen, portAsClosed, portDataReceived);
       console.log('creating port');
       sendPortInfo();
     });
@@ -77,8 +84,8 @@ var ServerController = (()=>{
       socket.emit('portSettings', {
         portInfo: portInfo
       });
-    }
-    //serialPort.sendData('R');
+    };
+    
 
     socket.on('COMListRequest', ()=>{
       SerialPortLister.getSerialPortsList((COMPortLista)=>{
