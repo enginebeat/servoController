@@ -1,0 +1,76 @@
+.container{
+  display: grid;
+  grid-template-columns: 15% 70% 15%;
+}
+
+.content{
+  border: 2px solid grey;
+  padding-left: 1em;
+}
+
+.mainHeader{
+  background-color: rgb(231, 228, 229);
+  margin: 0;
+}
+
+h1{
+  margin: 0;
+}
+
+.valuesPanel{
+  display: grid;
+  grid-gap: 1em;
+  grid-template-columns: 45% 45%;
+  grid-template-rows: repeat(repeat, 3fr);
+  grid-template-areas:  "bp ap"
+                        "tp rp"
+                        "ep ep"
+}
+
+.batteryHeader{
+  grid-area: bh;
+}
+
+.arrayHeader{
+  grid-area: ah;
+}
+
+.batteryPanel{
+  grid-area: bp;
+}
+
+.arrayPanel{
+  grid-area: ap;
+}
+
+.temperaturesPanel{
+  grid-area: tp;
+}
+
+.reseatablePanel{
+  grid-area: rp;
+}
+
+.errorsPanel{
+  grid-area: ep;
+}
+
+.bValues{
+  border: solid 1px black;
+  padding-left: 0.5em;
+}
+
+.aValues{
+  border: solid 1px black;
+  padding-left: 0.5em;
+}
+
+.tValues{
+  border: solid 1px black;
+  padding-left: 0.5em;
+}
+
+.rValues{
+  border: solid 1px black;
+  padding-left: 0.5em;
+}

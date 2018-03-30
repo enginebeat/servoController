@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Servo Driver</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="serialPortStatus">
+      <h3 id="portStatus">Serial Port Status:  Disconnected</h3>
+    </div>
+    <div id="serialPort_container">
+      <div class="serialPort-header">
+        <p><strong class="SerialP_header">Serial Port Settings</strong></p>
+      </div>
+
+      <div class="databits_header">
+        <p><strong>Data bits</strong></p>
+      </div>
+      <div class="radio-d7">
+        <input type="radio" class="radio-select" class="databits7" name="databits" value="7">
+      </div>
+      <div class="label-radio-d7">
+        <label for="databits7">7 bits</label>
+      </div>
+      <div class="radio-d8">
+        <input type="radio" class="radio-select" id = "db8" class="databits8" name="databits" value="8">
+      </div>
+      <div class="label-radio-d8">
+        <label for="databits8">8 bits</label>
+      </div>
+      <div class="radio-d9">
+        <input type="radio" class="radio-select" class="databits9" name="databits" value="9">
+      </div>
+      <div class="label-radio-d9">
+        <label for="databits9">9 bits</label>
+      </div>
+
+      <div class="stopbits_header">
+        <p><strong>Stop bits</strong></p>
+      </div>
+      <div class="radio-s1">
+        <input type="radio" class="radio-select" class= "generic_radio" id="stopbits1" name="stopbits" value="1">
+      </div>
+      <div class="label-radio-s1">
+        <label for="stopbits1">1 bit</label>
+      </div>
+      <div class="radio-s15">
+        <input type="radio" class="radio-select" id="stopbits15" name="stopbits" value="15">
+      </div>
+      <div class="label-radio-s15">
+        <label for="stopbits15">1.5 bit</label>
+      </div>
+      <div class="radio-s2">
+        <input type="radio" class="radio-select" id="stopbits2" name="stopbits" value="2">
+      </div>
+      <div class="label-radio-s2">
+        <label for="stopbits2">2 bit</label>
+      </div>
+
+      <div class="parity_header">
+        <p><strong>Parity</strong></p>
+      </div>
+      <div class="radio-pNone">
+        <input type="radio" class="radio-select" id="pnone" name="parity" value="none">
+      </div>
+      <div class="label-radio-pNone">
+        <label for="pNone">none</label>
+      </div>
+      <div class="radio-pOdd">
+        <input type="radio" class="radio-select" id="podd" name="parity" value="odd">
+      </div>
+      <div class="label-pOdd">
+        <label for="pOdd">odd</label>
+      </div>
+      <div class="radio-pEven">
+        <input type="radio" class="radio-select" id="peven" name="parity" value="even">
+      </div>
+      <div class="label-radio-pEven">
+        <label for="pEven">even</label>
+      </div>
+
+      <div class="baudrate-header">
+        <p><strong>Baudrate</strong></p>
+      </div>
+      <div class="baudrate-selector">
+        <select id="baudrate_select" name="baudrate_select">
+          <option id= "br1200" value="1200">1200</option>
+          <option id= "br2400" value="2400">2400</option>
+          <option id= "br4800" value="4800">4800</option>
+          <option id= "br9600" value="9600">9600</option>
+          <option id= "br14400" value="14400">14400</option>
+          <option id= "br38400" value="38400">38400</option>
+          <option id= "br57600" value="57600">57600</option>
+          <option id= "br115200" value="115200">115200</option>
+          <option id= "br128000" value="128000">128000</option>
+          <option id= "br256000" value="256000">256000</option>
+
+        </select>
+      </div>
+      <div id="COMPort_Selector">
+        <select id="COMPort_select" name="COMPort_select">
+          <option id= "COM0" value="COM0">COM0</option>
+          <option id= "COM1" value="COM1">COM1</option>
+        </select>
+
+      </div>
+      <div class="connect-button-container">
+        <input type="button" id= "connect_btn" name="connect-btn" value= "Connect">
+      </div>
+    </div>
+
+
+    <div class="servoContainer">
+
+
+      <form class="servoControl" action="/" method="post">
+        <div class="servo1">
+          <h3>Servo 1</h3>
+          <h4 id="servo1_Value">value</h4>
+          <input type="range" id="r_servo1" name="servo1" value="0" min="-90" max= "90" step="1">
+        </div>
+        <div class="servo2">
+          <h3>Servo 2</h3>
+          <h4 id="servo2_Value">value</h4>
+          <input type="range" id="r_servo2" name="servo2" value="0" min="-90" max= "90" step="1">
+        </div>
+        <div class="servo3">
+          <h3>Servo 3</h3>
+          <h4 id="servo3_Value">value</h4>
+          <input type="range" id="r_servo3" name="servo3" value="0" min="-90" max= "90" step="1">
+        </div>
+      </form>
+
+    </div>
+
+
+
+    <!--
+    <div class="graph1">
+      <canvas id="myCanvas"></canvas>
+    </div>
+  -->
+
+    <div class="">
+      <form class="" action="/" method="post">
+        <input type="text" id= "text1" name="text1" value="">
+        <input type="text" id= "text2" name="text2" value="">
+        <button type="submit" name="button">Submit</button>
+      </form>
+    </div>
+    <div class="">
+      <button type="button" id="sendBtn" name="button">Send</button>      
+    </div>
+    <script src="index.js"> </script>
+  </body>
+</html>

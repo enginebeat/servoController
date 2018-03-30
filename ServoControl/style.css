@@ -1,0 +1,219 @@
+*{
+    font-family: 'Open Sans', sans-serif;
+}
+
+
+#container{
+    display: grid;
+    grid-template-columns: 20% 65% 15%;
+    position: relative;
+}
+
+#leftSide{
+    border: 1px solid black;
+    position: relative;
+    height: 500px;
+}
+
+#content{
+    border: 1px solid black;
+}
+
+#rightSide{
+    border: 1px solid black;
+}
+
+#serialPortContainer{
+    position: relative;
+    border: 1px solid black;
+}
+#SerialP_header{
+    position: absolute;
+    top: 0px;    
+}
+
+#portStatus{
+    position: absolute;
+    top: 40px;
+}
+
+#databits_header{
+    position: absolute;
+    top: 70px;
+}
+  
+#databits7{
+    position: absolute;
+    top: 110px;
+}
+
+#label-databits7{
+    position: absolute;
+    top: 110px;
+    left:25px;
+}
+
+#databits8{
+    position: absolute;
+    top: 130px;
+}
+
+#label-databits8{
+    position: absolute;
+    top: 130px;
+    left:25px;
+}
+
+#databits9{
+    position: absolute;
+    top: 150px;
+}
+
+#label-databits9{
+    position: absolute;
+    top: 150px;
+    left:25px;
+}
+
+#stopbits_header{
+    position: absolute;
+    top: 70px;
+    left: 100px; 
+}
+#stopbits1{
+    position: absolute;
+    top: 110px;
+    left: 100px;
+}
+
+#label-radio-s1{
+    position: absolute;
+    top: 110px;
+    left:125px;
+}
+#stopbits15{
+    position: absolute;
+    top: 130px;
+    left: 100px;
+    
+}
+
+#label-radio-s15{
+    position: absolute;
+    top: 130px;
+    left:125px;
+}
+#stopbits2{
+    position: absolute;
+    top: 150px;
+    left:100px;
+}
+
+#label-radio-s2{
+    position: absolute;
+    top: 150px;
+    left:125px;
+}
+
+#parity_header{
+    position: absolute;
+    top: 160px;
+    
+}
+#pNone{
+    position: absolute;
+    top: 200px;
+}
+#label-pNone{
+    position: absolute;
+    top: 200px;
+    left:25px;
+}
+#pOdd{
+    position: absolute;
+    top: 220px;
+    
+}
+#label-pOdd{
+    position: absolute;
+    top: 220px;
+    left:25px;
+}
+
+#pEven{
+    position: absolute;
+    top: 240px;
+}
+#label-pEven{
+    position: absolute;
+    top: 240px;
+    left:25px;
+}
+
+#baudrate-header{
+    position: absolute;
+    top: 160px;
+    left: 100px;
+}
+#baudrate_selector{
+    position: absolute;
+    top: 200px;
+    left:100px; 
+}
+
+#COMPort-header{
+    position: absolute;
+    top: 200px;
+    left:100px;
+}
+#COMPort_selector{
+    position: absolute;
+    top: 240px;
+    left:100px;
+}
+
+#connect_btn{
+    position: absolute;
+    top: 270px;
+    left:10px;
+    width: 150px;
+    height: 40px;
+    border-radius: 10px;
+}
+
+#servo1_container{
+    position: relative;
+    border: 1px solid black;
+    width: 500px;
+    height: 100px;
+}
+
+#sv1_header{
+    position: absolute;
+    top: 5px;
+    left:170px;
+    margin: 0;
+}
+
+#servo1_value{
+    position: absolute;
+    top: 35px;
+    left:115px;
+    margin: 0;
+
+}
+
+#r_servo1{
+    position: absolute;
+    top: 60px;
+    left:50px;
+    margin: 0;
+    width: 300px;
+}
+
+.servoBtn{
+    position: absolute;
+    width: 60px;
+    height: 30px;
+    border-radius: 10px;
+}

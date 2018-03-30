@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
+    <script src="index.js"></script>
+</head>
+<body>
+    <div id="container">
+        <div id="leftSide">
+            <div id="serialPortContainer">
+                
+                <h1 id="SerialP_header">Serial Port Settings</h1>
+                
+                
+                <h3 id="portStatus">Serial Port Status:  Disconnected</h3>
+                
+                
+                <h4 id="databits_header">Data bits</h4>
+                
+                <input type="radio" class="radio-select" id="databits7" name="databits" value="7">
+                <label for="databits7" id="label-databits7" >7 bits</label>
+                
+                <input type="radio" class="radio-select" id="databits8" name="databits" value="8" checked>
+                <label for="databits8" id="label-databits8">8 bits</label>
+                
+                <input type="radio" class="radio-select" id="databits9" name="databits" value="9">
+                <label for="databits9" id="label-databits9">9 bits</label>
+                
+
+                <h4 id="stopbits_header">Stop bits</h4>
+                
+                <input type="radio" class="radio-select" class= "generic_radio" id="stopbits1" name="stopbits" value="1" checked>
+                <label for="stopbits1" id="label-radio-s1">1 bit</label>
+                
+                <input type="radio" class="radio-select" id="stopbits15" name="stopbits" value="15">
+                <label for="stopbits15" id="label-radio-s15">1.5 bit</label>
+                
+                <input type="radio" class="radio-select" id="stopbits2" name="stopbits" value="2">
+                <label for="stopbits2" id="label-radio-s2">2 bit</label>
+                
+        
+                <h4 id="parity_header">Parity</h4>
+                
+                <input type="radio" class="radio-select" id="pNone" name="parity" value="none" checked>
+                <label for="pNone" id="label-pNone">none</label>
+               
+                <input type="radio" class="radio-select" id="pOdd" name="parity" value="odd">
+                <label for="pOdd" id="label-pOdd">odd</label>
+               
+                <input type="radio" class="radio-select" id="pEven" name="parity" value="even">
+                <label for="pEven" id="label-pEven">even</label>
+               
+        
+                <h4 id="baudrate-header">Baudrate</h4>
+                <select id="baudrate_selector" name="baudrate_select">
+                    <option value="1200">1200</option>
+                    <option value="2400">2400</option>
+                    <option value="4800">4800</option>
+                    <option value="9600">9600</option>
+                    <option value="14400">14400</option>
+                    <option value="38400">38400</option>
+                    <option value="57600">57600</option>
+                    <option selected value="115200">115200</option>
+                    <option value="128000">128000</option>
+                    <option value="256000">256000</option>
+                </select>
+                
+                <h4 id="COMPort-header">COM Port</h4>
+                <select id="COMPort_selector" name="COMPort_select">
+                    <option value="COM0">COM0</option>
+                    <option value="COM1">COM1</option>
+                    <option value="COM5">COM5</option>
+                    <option selected value="COM6">COM6</option>
+                </select>
+        
+                
+                <input type="button" id= "connect_btn" name="connect-btn" value= "Connect">
+            </div>
+       </div>
+       <div id="content">
+           <h1>Content</h1>
+
+           <div id="servo1_container">
+                <h2 id="sv1_header">Servo 1</h2>
+                <h3 id="servo1_value">value</h3>
+                <input type="range" id="r_servo1" name="servo1" value="0" min="-90" max= "90" step="1">
+                <button class= servoBtn>Min</button>
+                <button class= servoBtn>Centre</button>
+                <button class= servoBtn>Max</button>
+
+                </div>
+       </div>
+       <div id="rightSide">
+           <h2>Right Side</h2>
+        </div>
+
+    </div> 
+</body>
+</html>

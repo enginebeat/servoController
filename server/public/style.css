@@ -1,0 +1,131 @@
+p{
+  margin: 0.3em;
+}
+
+#serialPort_container{
+  background-color: rgb(217, 217, 217);
+  margin: auto;
+  width: 60%;
+  display: grid;
+  grid-template-rows: repeat(5, 1fr);
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-areas:  "sps sps sps sps sps sps sps sps"
+                        "dbh dbh sbh sbh pah pah brh brh"
+                        "db7 dl7 sb1 sl1 npa npl brs brs"
+                        "db8 dl8 sb15 sl15 opa opl cps cps"
+                        "db9 dl9 sb2 sl2 epa epl cbtn cbtn";
+}
+
+.serialPort-header{
+  padding-left: 20em;
+  grid-area: sps;
+}
+
+.databits_header{
+  padding-left: 2.8em;
+  grid-area: dbh;
+}
+
+.radio-d7{
+  padding-left: 3em;
+  pading-top: 0;
+  grid-area: db7;
+}
+.label-radio-d7{
+  grid-area: dl7;
+}
+.radio-d8{
+  padding-left: 3em;
+  grid-area: db8;
+}
+.label-radio-d8{
+  grid-area: dl8;
+}
+
+.radio-d9{
+  padding-left: 3em;
+ grid-area: db9;
+}
+.label-radio-d9{
+  grid-area: dl9;
+}
+
+.stopbits_header{
+  padding-left: 2.8em;
+  grid-area: sbh;
+}
+.radio-s1{
+  padding-left: 3em;
+  grid-area: sb1;
+}
+.label-radio-s1{
+  grid-area: sl1;
+}
+.radio-s15{
+  padding-left: 3em;
+  grid-area: sb15;
+}
+.label-radio-s15{
+  grid-area: sl15;
+}
+.radio-s2{
+  padding-left: 3em;
+  grid-area: sb2;
+}
+.label-radio-s2{
+  grid-area: sl2;
+}
+.parity_header{
+  padding-left: 3.1em;
+  grid-area: pah;
+}
+.radio-pNone{
+  padding-left: 3em;
+  grid-area: npa;
+}
+.label-radio-pNone{
+  grid-area: npl;
+}
+.radio-pOdd{
+  padding-left: 3em;
+  grid-area: opa;
+}
+.label-pOdd{
+  grid-area: opl;
+}
+
+.radio-pEven{
+  padding-left: 3em;
+  grid-area: epa;
+}
+.label-radio-pEven{
+  grid-area: epl;
+}
+
+.baudrate-header{
+  grid-area: brh;
+}
+#baudrate-selector{
+  grid-area: brs;
+}
+
+#COMPort_Selector{
+  grid-area: cps;
+}
+
+.connect-button-container{
+  grid-area: cbtn;
+}
+
+.graph1{
+  border: 1px solid black;
+  width: 300px;
+  height: 300px;
+}
+
+h4{
+  margin: 0;
+}
+h3{
+  margin: 0;
+}
