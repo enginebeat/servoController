@@ -1,5 +1,7 @@
 //Make connection
-var socket = io.connect('http://localhost:9000');
+var serverIPAddress = location.hostname;
+var serverPort = location.port;
+var socket = io.connect('http://' + serverIPAddress + ':' + serverPort);
 
 
 
@@ -135,7 +137,7 @@ DOMStrings.connectBtn.addEventListener('click', ()=>{
     var closeChoice = confirm('Are you sure you want close ' + DOMStrings.COMPort.value + '?');
     if(closeChoice){
       socket.emit('closePortRequest', {});
-      
+
     }
   }
   

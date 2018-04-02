@@ -6,6 +6,13 @@ var ServerController = (()=>{
   var SerialPortLister = require('./myModules/SerialPortLister');
   //var ServerController = require('./myModules/ServerController');
   //var SocketController = require('./myModules/SocketController');
+
+  var os = require( 'os' );
+
+  var networkInterfaces = os.networkInterfaces( );
+
+  console.log( networkInterfaces );
+
   var serialPortController;
 
   var express = require('express');
@@ -14,8 +21,8 @@ var ServerController = (()=>{
 
   var socket = require("socket.io");
 
-  var server = app.listen(9000, ()=>{
-    console.log('server started on port 9000')
+  var server = app.listen(9000,'0.0.0.0', ()=>{
+    console.log('server started on port 9000');
 
   });
 
