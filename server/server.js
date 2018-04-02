@@ -7,11 +7,17 @@ var ServerController = (()=>{
   //var ServerController = require('./myModules/ServerController');
   //var SocketController = require('./myModules/SocketController');
 
-  var os = require( 'os' );
-
-  var networkInterfaces = os.networkInterfaces( );
-
-  console.log( networkInterfaces );
+  function getServerNetworkInfo(){
+    var os = require( 'os' );
+    var networkInterfaces = os.networkInterfaces( );
+    // I got the key which gives me the interface type, now need the IP Address & mac Address
+    console.log( networkInterfaces );
+    Object.keys(networkInterfaces).forEach((key)=>{
+      console.log(key); 
+    });
+  }
+  
+  getServerNetworkInfo();
 
   var serialPortController;
 

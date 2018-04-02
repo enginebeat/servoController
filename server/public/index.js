@@ -6,23 +6,10 @@ var socket = io.connect('http://' + serverIPAddress + ':' + serverPort);
 
 
 /* DOM Strings */
-var DOMStrings = {
-  text1: document.getElementById('text1'),
-  text2: document.getElementById('text2'),
-  
-  r_servo1: document.getElementById('r_servo1'),
-  servo1_Value: document.getElementById('servo1_Value'),
-  r_servo2: document.getElementById('r_servo2'),
-  servo2_Value: document.getElementById('servo2_Value'),
-  r_servo3: document.getElementById('r_servo3'),
-  servo3_Value: document.getElementById('servo3_Value'),
-  
-  connectBtn : document.getElementById('connect_btn'),
+var DOMStrings = {  
   baudrate: document.getElementById('baudrate_select'),
   COMPort: document.getElementById('COMPort_select'),
   portStatus: document.getElementById('portStatus'),
-  serialPort_container: document.getElementById('serialPort_container'),
-  sendBtn : document.getElementById('sendBtn'),
   dataBitsSel: document.getElementsByName('databits'),
   stopBitsSel: document.getElementsByName('stopbits'),
   paritySel: document.getElementsByName('parity'), 
@@ -30,6 +17,21 @@ var DOMStrings = {
   databits: document.querySelector('input[name="databits"]:checked'),
   stopbits: document.querySelector('input[name="stopbits"]:checked'),
   parity: document.querySelector('input[name="parity"]:checked'),
+  serialPort_container: document.getElementById('serialPort_container'),
+  
+  r_servo1: document.getElementById('r_servo1'),
+  servo1_Value: document.getElementById('servo1_Value'),
+  r_servo2: document.getElementById('r_servo2'),
+  servo2_Value: document.getElementById('servo2_Value'),
+  r_servo3: document.getElementById('r_servo3'),
+  servo3_Value: document.getElementById('servo3_Value'),
+
+  text1: document.getElementById('text1'),
+  text2: document.getElementById('text2'),
+  
+  connectBtn : document.getElementById('connect_btn'),
+  sendBtn : document.getElementById('sendBtn'),
+  
 }
 
 /* Client function to populate the port settings */
