@@ -4,21 +4,32 @@ var ServerController = (()=>{
   //MyModules Require
   var SerialPortController = require('./myModules/SerialPortController');
   var SerialPortLister = require('./myModules/SerialPortLister');
+  
   //var ServerController = require('./myModules/ServerController');
   //var SocketController = require('./myModules/SocketController');
 
   function getServerNetworkInfo(){
+    var networkInfo = '';
+    
     var os = require( 'os' );
-    var networkInterfaces = os.networkInterfaces( );
-    // I got the key which gives me the interface type, now need the IP Address & mac Address
-    console.log( networkInterfaces );
+    var networkInterfaces = os.networkInterfaces();
+    
     Object.keys(networkInterfaces).forEach((key)=>{
+      networkInfo += String(key) + ': { ipAddress:' + String(networkInterfaces[key][1].address) + ',' + 
+        ' macAddress:' + String(networkInterfaces[key][1].mac) + '}';
+
       console.log(key); 
+      console.log(networkInterfaces[key][1].address);
+      console.log(networkInterfaces[key][1].mac);
     });
+    //networkInfo = '{' + networkInfo + '}';
+    //networkInfoJSON = JSON.parse(networkInfo);
+    //console.log(networkInfo);
+    return networkInfoJSON;
   }
   
-  getServerNetworkInfo();
-
+  var networkInfo = getServerNetworkInfo();
+  console.log(networkInfo);
   var serialPortController;
 
   var express = require('express');
@@ -29,7 +40,7 @@ var ServerController = (()=>{
 
   var server = app.listen(9000,'0.0.0.0', ()=>{
     console.log('server started on port 9000');
-
+    //Socket setup needs to be in here or the server may not be open when you get the socket
   });
 
 
