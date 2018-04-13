@@ -25,7 +25,7 @@ var ServerController = (()=>{
     //networkInfo = '{' + networkInfo + '}';
     //networkInfoJSON = JSON.parse(networkInfo);
     //console.log(networkInfo);
-    return networkInfoJSON;
+    //return networkInfoJSON;
   }
   
   var networkInfo = getServerNetworkInfo();
@@ -34,12 +34,12 @@ var ServerController = (()=>{
 
   var express = require('express');
   var app = express();
-  app.use(express.static('server/public'));
+  app.use(express.static('./public'));
 
   var socket = require("socket.io");
 
-  var server = app.listen(9000,'0.0.0.0', ()=>{
-    console.log('server started on port 9000');
+  var server = app.listen(7000,'0.0.0.0',()=>{
+    console.log('server started on port 7000');
     //Socket setup needs to be in here or the server may not be open when you get the socket
   });
 
