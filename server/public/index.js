@@ -85,17 +85,57 @@ window.onload = function(){
 
 // Servo driver Range Controls
 DOMStrings.r_servo1.addEventListener('input', ()=>{
-  sendServoDataToServer(DOMStrings.r_servo1,DOMStrings.r_servo1.value);
+  //sendServoDataToServer(DOMStrings.r_servo1,DOMStrings.r_servo1.value);
+  sendServoDataToServer();
 });
 DOMStrings.r_servo2.addEventListener('input', ()=>{
-  sendServoDataToServer(DOMStrings.r_servo2,DOMStrings.r_servo2.value);
+  //sendServoDataToServer(DOMStrings.r_servo2,DOMStrings.r_servo2.value);
+  sendServoDataToServer();
 });
 DOMStrings.r_servo3.addEventListener('input', ()=>{
-  sendServoDataToServer(DOMStrings.r_servo3,DOMStrings.r_servo3.value);
+  //sendServoDataToServer(DOMStrings.r_servo3,DOMStrings.r_servo3.value);
+  sendServoDataToServer();
 
 });
 
-var sendServoDataToServer = (servo, value)=>{
+/* wil need refacturing to streamline it and add the other servos. */
+//var sendServoDataToServer = (servo, value)=>{
+var sendServoDataToServer = ()=>{
+  let servoValues = {
+    servo1: 0,
+    servo2: 0,
+    servo3: 0,
+    //servo4: 0,
+    //servo5: 0,
+    //servo6: 0,
+    //servo7: 0,
+    //servo8: 0,
+    //servo9: 0,
+    //servo10: 0,
+    //servo11: 0,
+    //servo12: 0,
+    //servo13: 0,
+    //servo14: 0,
+    //servo15: 0,
+    //servo16: 0,
+    //servo17: 0,
+    //servo18: 0,
+  }
+
+  /* this is the way I want to go but it a problem with setting the 
+  servoX_Value... need to find a way */
+  for( let servoValue in servoValues){    
+    servoValues[servoValue] = (Math.round(150 + 
+      (5 * document.getElementById(`r_${servoValue}`).value)/9));
+      document.getElementById(`${servoValue}_Value`).innerHTML = servoValues[servoValue];
+  };
+  socket.emit('servoValue', servoValues);
+    
+
+  
+   
+  
+  /*
   //console.log(servo.id, value);
   switch(servo.id){
     case 'r_servo1':
@@ -112,11 +152,13 @@ var sendServoDataToServer = (servo, value)=>{
       console.log("in Default");
       break;
   }
-  // send value to server
-  socket.emit('servoValue', {
-    servoID: servo.id,
-    servoValue: (Math.round(150 + (5 * value)/9))
-  });
+
+  // send value for one servo to the server
+  //socket.emit('servoValue', {
+    //servoID: servo.id,
+    //servoValue: (Math.round(150 + (5 * value)/9))
+  //});
+  */
 };
 
 function writeReceivedData(receivedData){
@@ -179,4 +221,3 @@ socket.on('portCloseReply', ()=>{
   populateSerialPortSettings(null);
   console.log('Closing Port');
 })
-

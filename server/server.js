@@ -46,28 +46,36 @@ var ServerController = (()=>{
 
   //Socket setup
   var io = socket(server);
+  /* packet atring */
+  var dataString = "";
+  var dataStringLock = 0; //show who is using the string
+  var receiveCount = 0;
 
   io.on('connection', (socket)=>{
     console.log('new connection', socket.id);
+    
     //Receive values from the client
     socket.on('servoValue', (data)=>{
-      console.log(data.servoID);
-      console.log(data.servoValue);
-
-      //decimal to ascii hex conversion
-      var decimalValue = data.servoValue;
-      var ln = decimalValue & 15;
-
-      console.log('ln:',hexToAscii(ln));
-      var hn = (decimalValue & 240) >> 4;
-      console.log('hn:',hexToAscii(hn));
-
-      /* Need to implement sending Data to the serial Port
-         But only when the serialPort is created. */
-      if(serialPortController != null){
-        serialPortController.sendData(ln.toString());
-        serialPortController.sendData(hn.toString());
+      console.log(data);
+      if(dataStringLock !== 2 && dataStringLock !== 1){
+        dataStringLock = 1;
+        dataString = "";
+        for(key in data){
+          //decimal to ascii hex conversion
+          var decimalValue = data[key];
+          var ln = decimalValue & 15;
+          //console.log('ln:',hexToAscii(ln));
+          var hn = (decimalValue & 240) >> 4;
+          //console.log('hn:',hexToAscii(hn));
+          dataString = dataString + hexToAscii(ln) + hexToAscii(hn); 
+        }
+        //dataString = `(0001${dataString}000000000000000000000000000000000000000000000000000000000000)`;
+        dataString = `(0001${dataString})`;
+        console.log("");
+        console.log(dataString);
+        dataStringLock = 0;
       }
+      
     });
     
     /* Sends Message when port is opened */
@@ -83,10 +91,21 @@ var ServerController = (()=>{
     };
 
     function portDataReceived(data){
+      
       console.log("received Data: ", data.toString());
-        socket.emit('COMData', {
+      console.log(receiveCount++ + ": " + data[1]);
+      if(data[1] === 82){
+        if(dataStringLock !== 1 && dataStringLock !== 2){
+          dataStringLock = 2;
+          console.log(dataString.length);
+          console.log(dataString);
+          serialPortController.sendData(dataString);
+        }
+        dataStringLock = 0;
+      }
+      socket.emit('COMData', {
           sData: data.toString()
-        });
+      });
     };
 
     // Start Serial Port and get data if available
