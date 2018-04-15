@@ -87,31 +87,32 @@ void checkandProcessData(){
             dataBuffer[count] = inByte;
             count++;
           };
+          //end of packet received
           if(inByte == 41){
             Serial.println("C)");
             dataBuffer[count] = inByte;
             stateFlag = 2;
           };
           break;
-        case 2:
-          for(int i = 0; i < 18; i++){
+        default:
+          stateFlag = 0;
+          break;
+      }
+      if(stateFlag == 2){
+        Serial.println("D)");
+        for(int i = 0; i < 18; i++){
             Serial.print(dataBuffer[i]);
-          }
+          };
           stateFlag = 0;
           //packet is in and end of packet received
           if(count == 18){
             
             //Serial.println(getServoValue(data));
             
-          }
-          break;
-        default:
-          stateFlag = 0;
-          break;
-      }      
-    }
-    
-     
+          } ; 
+      };
+              
+    } 
   }
   //Serial.println(count);
   if(count == 78){
