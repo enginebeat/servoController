@@ -59,6 +59,7 @@ void checkandProcessData(){
   count = 0;
   Serial.print("(R)");
   int stateFlag = 0;
+  //while(stopCheckFlag == 0){
   while(micros() <= (countEndStop - dataProcessTime)){
     /* Inside here I need to deal with the packet and get
      *  values for the servos
@@ -74,7 +75,7 @@ void checkandProcessData(){
           //start of packet not received
           count = 0;
           if(inByte == 40){
-            Serial.println("A)");
+            //Serial.println("A)");
             dataBuffer[count] = inByte;
             count++;
             stateFlag = 1; //start of packet received
@@ -83,15 +84,18 @@ void checkandProcessData(){
         case 1:
           //start of packet received getting all the data in
           if(inByte != 40 || inByte != 41){
-            Serial.println("B)");
+            //Serial.println("B)");
             dataBuffer[count] = inByte;
             count++;
           };
           //end of packet received
           if(inByte == 41){
-            Serial.println("C)");
+            //Serial.println("C)");
             dataBuffer[count] = inByte;
             stateFlag = 2;
+          };
+          if(inByte == 40){
+            stateFlag = 0; //discard and start again.
           };
           break;
         default:
@@ -100,23 +104,23 @@ void checkandProcessData(){
       }
       if(stateFlag == 2){
         Serial.println("D)");
-        for(int i = 0; i < 18; i++){
-            Serial.print(dataBuffer[i]);
-          };
-          stateFlag = 0;
-          //packet is in and end of packet received
-          if(count == 18){
-            
-            //Serial.println(getServoValue(data));
-            
-          } ; 
+        //for(int i = 0; i < 78; i++){
+            //Serial.print(dataBuffer[i]);
+        //};
+        stateFlag = 0;
+        //packet is in and end of packet received
+        
+        if(count == 18){
+          //Serial.println(getServoValue(data));
+          //stopCheckFlag = 1;  
+        }; 
       };
               
     } 
   }
   //Serial.println(count);
   if(count == 78){
-    Serial.println("(D)");
+    //Serial.println("(D)");
     //Serial.print("(");
     //Serial.print(getServoValue(data));
     //Serial.println(")");

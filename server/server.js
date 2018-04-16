@@ -68,9 +68,10 @@ var ServerController = (()=>{
           var hn = (decimalValue & 240) >> 4;
           //console.log('hn:',hexToAscii(hn));
           dataString = dataString + hexToAscii(ln) + hexToAscii(hn); 
-        }
+          
+        } 
         //dataString = `(0001${dataString}000000000000000000000000000000000000000000000000000000000000)`;
-        dataString = `(0001${dataString})`;
+        dataString = `(0001${dataString}000000000000000000000000)`; //0000 0000 0000 0000 0000 0000 0000 0000 0000)`;
         console.log("");
         console.log(dataString);
         dataStringLock = 0;
@@ -98,7 +99,7 @@ var ServerController = (()=>{
         if(dataStringLock !== 1 && dataStringLock !== 2){
           dataStringLock = 2;
           console.log(dataString.length);
-          console.log(dataString);
+          console.log(`sending: ${dataString}`);
           serialPortController.sendData(dataString);
         }
         dataStringLock = 0;
