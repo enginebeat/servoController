@@ -63,7 +63,9 @@ void checkandProcessData(){
       }
       if(stateFlag == 2){
         Serial.println("D)");
+        
         setServoValues();
+        
         Serial.print("(");
         for(int i = 0; i < 18; i++){
             Serial.print(servoValues[i]);
