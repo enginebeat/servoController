@@ -1,44 +1,11 @@
-int count = 0;
-int tickDelay = 5;
-int mainDelay = 3600; //18mS
-int minDelay = 200; //1mS
-int maxDelay = 400; //2mS
-
-int servo1Value = 1500 * 5;
-int servo2Value = 1500 * 5;
-int servo3Value = 1500 * 5;
-
-int timerBaseLine = 0;
-int dataProcessTime = 4000;
-int totalCountAvailableForProcess = 12000;
-//times turned into count
-// countNow = micros();
-// countFromStartOfInterval =  countNow - timerBaseLine;
-// countEndStop = countNow + totalCountAvailableForProcess; //need to deal with overflow
-
-int dataBuffer[78];
-int servoValues[18];
-
-int servoInitValue = 300;
-unsigned int data[2] = {8,12};
-
-
-void checkandProcessData();
-void servoDriver(); 
-unsigned int getServoValue(unsigned int data);
+#include "ServoDriver2.h"
  
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(115200);
-  //int count = 0;
-  pinMode(A0, OUTPUT);
-  pinMode(A1, OUTPUT);
-  pinMode(A2, OUTPUT);
+  setPinModes();
+  initServoValues();
   
-  //Init Servo values
-  for(int i = 0; i <= 17; i++){
-     servoValues[i] = servoInitValue;
-  }
 
 }
 
@@ -46,9 +13,6 @@ void loop() {
   
   checkandProcessData();
   servoDriver();
-  
-  
-
 }
 
 
@@ -63,9 +27,7 @@ void checkandProcessData(){
   while(micros() <= (countEndStop - dataProcessTime)){
     /* Inside here I need to deal with the packet and get
      *  values for the servos
-     * 
      */
-     
     if (Serial.available() > 0){
       // get incoming byte:
       int inByte = Serial.read();
@@ -75,7 +37,6 @@ void checkandProcessData(){
           //start of packet not received
           count = 0;
           if(inByte == 40){
-            //Serial.println("A)");
             dataBuffer[count] = inByte;
             count++;
             stateFlag = 1; //start of packet received
@@ -84,13 +45,11 @@ void checkandProcessData(){
         case 1:
           //start of packet received getting all the data in
           if(inByte != 40 || inByte != 41){
-            //Serial.println("B)");
             dataBuffer[count] = inByte;
             count++;
           };
           //end of packet received
           if(inByte == 41){
-            //Serial.println("C)");
             dataBuffer[count] = inByte;
             stateFlag = 2;
           };
@@ -104,9 +63,12 @@ void checkandProcessData(){
       }
       if(stateFlag == 2){
         Serial.println("D)");
-        //for(int i = 0; i < 78; i++){
-            //Serial.print(dataBuffer[i]);
-        //};
+        setServoValues();
+        Serial.print("(");
+        for(int i = 0; i < 18; i++){
+            Serial.print(servoValues[i]);
+        };
+        Serial.println(")");
         stateFlag = 0;
         //packet is in and end of packet received
         
@@ -117,16 +79,7 @@ void checkandProcessData(){
       };
               
     } 
-  }
-  //Serial.println(count);
-  if(count == 78){
-    //Serial.println("(D)");
-    //Serial.print("(");
-    //Serial.print(getServoValue(data));
-    //Serial.println(")");
-  }
-  //Serial.println(micros()); 
-  
+  }  
 }
 
 void servoDriver(){
@@ -135,12 +88,65 @@ void servoDriver(){
 
 }
 
+void setPinModes(){
+  pinMode(servo1_pin, OUTPUT);
+  pinMode(servo2_pin, OUTPUT);
+  pinMode(servo3_pin, OUTPUT);
+  pinMode(servo4_pin, OUTPUT);
+  pinMode(servo5_pin, OUTPUT);
+  pinMode(servo6_pin, OUTPUT);
+  //pinMode(servo7_pin, OUTPUT);
+  //pinMode(servo8_pin, OUTPUT);
+  //pinMode(servo9_pin, OUTPUT);
+  //pinMode(servo10_pin, OUTPUT);
+  //pinMode(servo11_pin, OUTPUT);
+  //pinMode(servo12_pin, OUTPUT);
+  //pinMode(servo13_pin, OUTPUT);
+  //pinMode(servo14_pin, OUTPUT);
+  //pinMode(servo15_pin, OUTPUT);
+  //pinMode(servo16_pin, OUTPUT);
+  //pinMode(servo17_pin, OUTPUT);
+  //pinMode(servo18_pin, OUTPUT);
+}
+
+void initServoValues(){
+  //Init Servo values
+  for(int i = 0; i <= 17; i++){
+     servoValues[i] = servoInitValue;
+  }
+}
+
+void setServoValues(){
+  unsigned int servoValue = 0;
+  unsigned int hn = 0;
+  unsigned int ln = 0;
+  int servoCount = 0;
+  for(int i = 5; i < 42; i++){
+    ln = getHexValue(dataBuffer[i]);
+    
+    i++; //just checking if this works.
+    hn = (getHexValue(dataBuffer[i])) << 4;
+    servoValues[servoCount] = hn | ln;
+    servoCount++;  
+  }
+}
+
+unsigned int getHexValue(unsigned int value){
+  unsigned int hexValue = 0;
+  if(value >= 48 and value <=57){
+    hexValue = value - 48;
+  }
+  if(value >= 65 and value <= 70){
+    hexValue = value - 55;
+  };
+  return hexValue;
+}
+
+/*
 unsigned int getServoValue(unsigned int data[2]){
   unsigned int servoValue= 0;
   int hn = data[1] << 4;
-
   servoValue = data[0] | hn;
-  
   return servoValue;
 }
-
+*/

@@ -72,7 +72,7 @@ var ServerController = (()=>{
         } 
         //dataString = `(0001${dataString}000000000000000000000000000000000000000000000000000000000000)`;
         dataString = `(0001${dataString}000000000000000000000000)`; //0000 0000 0000 0000 0000 0000 0000 0000 0000)`;
-        console.log("");
+        //console.log("");
         console.log(dataString);
         dataStringLock = 0;
       }
