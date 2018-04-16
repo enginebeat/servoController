@@ -40,7 +40,7 @@ int timerBaseLine = 0;
 int dataProcessTime = 4000;
 int totalCountAvailableForProcess = 12000;
 
-unsigned int dataBuffer[78];
+unsigned int dataBuffer[42];
 unsigned int servoValues[18];
 
 int servoInitValue = 300;

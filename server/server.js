@@ -64,14 +64,16 @@ var ServerController = (()=>{
           //decimal to ascii hex conversion
           var decimalValue = data[key];
           var ln = decimalValue & 15;
-          //console.log('ln:',hexToAscii(ln));
+          ln = hexToAscii(ln);
           var hn = (decimalValue & 240) >> 4;
-          //console.log('hn:',hexToAscii(hn));
-          dataString = dataString + hexToAscii(ln) + hexToAscii(hn); 
+          hn = hexToAscii(hn);
+          console.log(`ln: ${ln}`);
+          console.log(`ln: ${hn}`);
+          dataString = dataString + ln + hn; 
           
         } 
         //dataString = `(0001${dataString}000000000000000000000000000000000000000000000000000000000000)`;
-        dataString = `(0001${dataString}000000000000000000000000)`; //0000 0000 0000 0000 0000 0000 0000 0000 0000)`;
+        dataString = `(0001${dataString}000000000000000000000000000000)`; //0000 0000 0000 0000 0000 0000 0000 0000 0000)`;
         //console.log("");
         console.log(dataString);
         dataStringLock = 0;
@@ -176,9 +178,33 @@ var ServerController = (()=>{
 
   function hexToAscii(hexValue){
     if(hexValue >= 0 && hexValue <= 9){
-      return hexValue + 48;
+      return hexValue;
     } else if(hexValue >= 10 && hexValue <= 15){
-      return hexValue + 55;
+        switch(hexValue){
+          case 10:
+            hexValue = 'A';
+            break;
+          case 11:
+            hexValue = 'B';
+            break;
+          case 12:
+            hexValue = 'C';
+            break;
+          case 13:
+            hexValue = 'D';
+            break;
+          case 14:
+            hexValue = 'E';
+            break;
+          case 15:
+            hexValue = 'F';
+            break;
+          default:
+            hexValue = 0;
+            break;
+        }
+      
+      return hexValue;
     } else{
       return NaN;
     }
