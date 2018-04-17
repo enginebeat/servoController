@@ -85,7 +85,47 @@ void checkandProcessData(){
 }
 
 void servoDriver(){
-  
+  digitalWrite(servo1_pin, HIGH);
+  digitalWrite(servo2_pin, HIGH);
+  digitalWrite(servo3_pin, HIGH);
+  int done1 = 0;
+  int done2 = 0;
+  int done3 = 0;
+  int numberOfServosHigh = 3;
+  // initial 1mS, it will never be less than that
+  delayMicroseconds(1000);
+  int tickCounter = 200;
+  while(numberOfServosHigh > 0){
+    if(servoValues[0] <= tickCounter){
+      
+      if(done1 == 0){
+        digitalWrite(servo1_pin, LOW);
+        numberOfServosHigh--;
+        done1 = 1;
+      }
+      
+    }
+    if(servoValues[1] <= tickCounter){
+      
+      if(done2 == 0){
+        digitalWrite(servo2_pin, LOW);
+        numberOfServosHigh--;
+        done2 = 1;
+      }
+    }
+    if(servoValues[2] <= tickCounter){
+      
+      if(done3 == 0){
+        digitalWrite(servo3_pin, LOW);
+        numberOfServosHigh--;
+        done3 = 1;
+      }
+    }
+    
+    delayMicroseconds(25);
+    tickCounter += 5;
+  }
+ 
 
 
 }
@@ -109,6 +149,10 @@ void setPinModes(){
   //pinMode(servo16_pin, OUTPUT);
   //pinMode(servo17_pin, OUTPUT);
   //pinMode(servo18_pin, OUTPUT);
+
+  digitalWrite(servo1_pin, LOW);
+  digitalWrite(servo2_pin, LOW);
+  digitalWrite(servo3_pin, LOW);
 }
 
 void initServoValues(){
@@ -125,10 +169,10 @@ void setServoValues(){
   int servoCount = 0;
   for(int i = 5; i < 42; i++){
     ln = getHexValue(dataBuffer[i]);
-    
     i++; //just checking if this works.
     hn = (getHexValue(dataBuffer[i])) << 4;
     servoValues[servoCount] = hn | ln;
+    servoValues[servoCount] += servoValues[servoCount];
     servoCount++;  
   }
 }

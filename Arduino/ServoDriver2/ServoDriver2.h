@@ -17,7 +17,7 @@
 //#define servo17_pin A0
 //#define servo18_pin A0
 
-
+#define numberOfServos 3
 int count = 0;
 
 //times turned into count
@@ -38,7 +38,7 @@ int servo3Value = 1500 * 5;
 
 int timerBaseLine = 0;
 int dataProcessTime = 4000;
-int totalCountAvailableForProcess = 12000;
+int totalCountAvailableForProcess = 16000;
 
 unsigned int dataBuffer[42];
 unsigned int servoValues[18];
