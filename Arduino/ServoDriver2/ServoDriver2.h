@@ -43,7 +43,7 @@ int totalCountAvailableForProcess = 16000;
 unsigned int dataBuffer[42];
 unsigned int servoValues[18];
 
-int servoInitValue = 300;
+int servoInitValue = 150;
 unsigned int data[2] = {8,12};
 
 

@@ -84,7 +84,7 @@ void checkandProcessData(){
   }  
 }
 
-/*
+
 void servoDriver(){
   digitalWrite(servo1_pin, HIGH);
   digitalWrite(servo2_pin, HIGH);
@@ -95,7 +95,7 @@ void servoDriver(){
   int numberOfServosHigh = 3;
   // initial 1mS, it will never be less than that
   delayMicroseconds(1000);
-  int tickCounter = 200;
+  int tickCounter = 100;
   while(numberOfServosHigh > 0){
     if(servoValues[0] <= tickCounter){
       
@@ -123,25 +123,24 @@ void servoDriver(){
       }
     }
     
-    delayMicroseconds(25);
-    tickCounter += 5;
+    delayMicroseconds(30);
+    tickCounter += 3;
   }
 }
-*/
+/*
 void servoDriver(){
   digitalWrite(servo1_pin, HIGH);
   digitalWrite(servo2_pin, HIGH);
   digitalWrite(servo3_pin, HIGH);
-  int numberOfServosHigh = 1;
-  
-  delayMicroseconds(1000);
+  int opsDelay = 0;
+  unsigned int total = 0;
   unsigned int servo1Value = servoValues[0] - 100;
   unsigned int servo2Value = servoValues[1] - 100;
   unsigned int servo3Value = servoValues[2] - 100;
-  
-  
+  delayMicroseconds(1000);  
   do{
-
+    //opsDelay = micros();
+    total = servo1Value + servo2Value + servo3Value;
     if(servo1Value == 0){
       digitalWrite(servo1_pin, LOW);
     }
@@ -162,11 +161,13 @@ void servoDriver(){
     if(servo3Value != 0){
       servo3Value--; 
     }
-    delayMicroseconds(2);
+    //opsDelay = micros()- opsDelay;
+    delayMicroseconds(3);
   }
-  while(servo1Value != 0 || servo2Value != 0 || servo3Value != 0);  
+  while(total != 0);  
 }
-
+*/
+/*******************************************************************/
 void setPinModes(){
   pinMode(servo1_pin, OUTPUT);
   pinMode(servo2_pin, OUTPUT);
